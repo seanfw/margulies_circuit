@@ -1,4 +1,3 @@
-
 def get_stim(annot_file, label_name, cortex_file):
 
     ################################
