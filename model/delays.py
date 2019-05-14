@@ -17,9 +17,9 @@ def get_delays(surface, cortex_map):
     from scipy.spatial import distance_matrix
 
     surf = connectivity.load_surface(surface, cortex_map)
-    distances = distance_matrix(surf[0], surf[0]) # this is distance in vertices - let's assume = 1mm
+    distances = distance_matrix(surf[0], surf[0]) # this is distance in mm
 
-    tract_delays = np.round(distances/1.75, decimals=0).astype(int) # in units of timesteps
+    tract_delays = np.round(distances, decimals=0).astype(int) # in units of timesteps # /1.75
 
     # In the white matter, activity propagates at about 3.5m/s, but it might propagate more quickly for
     # longer/larger tracts.
