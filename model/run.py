@@ -97,7 +97,7 @@ for i_t in range(1,num_iterations):
 if c.get('save_output') == 'True':
     np.save('R.npy', pm['R'])
 
-start_time = 0.1
+start_time = 0.0
 end_time   = 3.0
 R          = pm['R']
 tm = np.arange((start_time)*brian2.second,(end_time)*brian2.second,dt)
