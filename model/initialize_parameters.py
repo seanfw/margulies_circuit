@@ -23,17 +23,17 @@ def initialize_pm(parameters, num_nodes, num_iterations, dt):
 
     # Choose initial values for rates and synapse variables
     R0 = np.ones((num_nodes, num_pops))
-    R0 = R0 * parameters['r0_E']
+    R0 = R0 * parameters['r0_E'] 
     S_NMDA0 = np.ones((num_nodes,num_pops)) * 0.1
     S_GABA0 = np.zeros((num_nodes,num_pops))
 
     #### Set up simulation details
     # Preassign rate and synapse matrices
-    R           = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.Hz
+    R             = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.Hz
     R[0,:,:]      = R0
-    S_NMDA      = np.zeros((num_iterations,num_nodes,num_pops))
+    S_NMDA        = np.zeros((num_iterations,num_nodes,num_pops))
     S_NMDA[0,:,:] = S_NMDA0
-    S_GABA      = np.zeros((num_iterations,num_nodes,num_pops))
+    S_GABA        = np.zeros((num_iterations,num_nodes,num_pops))
     S_GABA[0,:,:] = S_GABA0
 
     # Create matrices in which we can store the currents

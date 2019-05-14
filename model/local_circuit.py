@@ -3,15 +3,9 @@ import brian2
 
 def current_to_frequency(input_current,population_type,parameters):
     if population_type == 'E':
-        return current_to_frequency_E(input_current,parameters['a_E'],parameters['b_E'],parameters['d_E'])
+        return np.divide((parameters['a_E']*input_current - parameters['b_E']),(1 - np.exp(-parameters['d_E']*(parameters['a_E']*input_current - parameters['b_E']))))
     if population_type == 'I':
-        return current_to_frequency_I(input_current,parameters['c_I'],parameters['r0_I'])
-
-def current_to_frequency_E(input_current1,a,b,d):
-    return np.divide((a*input_current1 - b),(1 - np.exp(-d*(a*input_current1 - b))))
-
-def current_to_frequency_I(input_current1,c_I,r_0):
-    return np.maximum(c_I*input_current1 + r_0,0)
+        return np.maximum(parameters['c_I']*input_current + parameters['r0_I'],0)
 
 def NMDA_deriv(S_NMDA_prev,rate_now,parameters):
     return -S_NMDA_prev/parameters['tau_NMDA'] + parameters['gam']*(1 - S_NMDA_prev)*rate_now
@@ -33,7 +27,7 @@ def initialize_local(num_nodes, g_E_self=0.39, g_IE=0.23, g_I_self=-0.05, g_EI=-
                     'a_E': 270.  * brian2.Hz/brian2.nA / 2.,  # Hz/nA
                     'b_E': 108.  * brian2.Hz / 2.,            # Hz
                     'd_E': 0.154 * brian2.second * 2.,        # s
-                    'gam': 0.641 * 2.,                         # unitless
+                    'gam': 0.641, #* 2.,                        # unitless # CHECK!!!!
 
                     # f-I curve parameters - I populations
                     'c_I': 330 * brian2.Hz/brian2.nA,                 # Hz/nA
@@ -52,10 +46,9 @@ def initialize_local(num_nodes, g_E_self=0.39, g_IE=0.23, g_I_self=-0.05, g_EI=-
                     'g_I_midRange': 0.04 * brian2.nA,
                     'g_E_longRange': 0.2 * brian2.nA,
 
-
                     # Background inputs
-                    'I0_E': 0.20     * brian2.nA,           # nA - background onto E population
-                    'I0_I': 0.18      * brian2.nA,         # nA - background onto I population
+                    'I0_E': 0.31     * brian2.nA,           # nA - background onto E population
+                    'I0_I': 0.22      * brian2.nA,         # nA - background onto I population
 
                     # Noise std dev
                     'std_noise': 0.01 * brian2.nA,         # nA  - standard deviation of noise input
@@ -64,7 +57,7 @@ def initialize_local(num_nodes, g_E_self=0.39, g_IE=0.23, g_I_self=-0.05, g_EI=-
                     'r0_E': 5 * brian2.Hz,
 
                     # stimulus strength
-                    'stim_strength': 0.1 * brian2.nA
+                    'stim_strength': 0.2 * brian2.nA
                         })
 
     return parameters
