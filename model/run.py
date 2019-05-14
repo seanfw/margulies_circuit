@@ -9,10 +9,15 @@ import brian2
 import numpy as np
 from numba import jit
 import matplotlib.pyplot as plt
+import nibabel as nib
+import nilearn
+from nilearn import plotting
+import surfdist
+from surfdist import utils, load
 
 # Set up simulation details
 long_range     = False
-mid_range      = False
+mid_range      = True
 dt             = 0.5 * brian2.ms  # timestep
 trial_length   = 3000 * brian2.ms # trial length (s)
 num_iterations = int(trial_length/dt)
@@ -21,6 +26,7 @@ stim_on        = 0.5 * brian2.second
 stim_off       = 1.0 * brian2.second
 
 surf_file      = './fsaverage4/lh.pial'
+surf_file_inf  = './fsaverage4/lh.inflated'
 cort_file      = './fsaverage4/lh.cortex.label'
 annot_file     = './fsaverage4/lh.aparc.a2009s.annot'
 label_name     = 'S_calcarine'
@@ -121,4 +127,28 @@ plt.ylabel('firing rate (Hz)')
 # plt.ylim(0, 80)
 
 plt.savefig('./figures/stim_response.png')
+plt.close(fig)
+
+# plot surfaces:
+fig, ax = plt.subplots(2,10, figsize=(60,10), subplot_kw={'projection': '3d'})
+surf   = nib.freesurfer.read_geometry(surf_file_inf)
+cortex = np.sort(nib.freesurfer.read_label(cort_file))
+t = np.arange(int(start_time/dt),int(end_time/dt))
+idx = np.int(np.round(len(t)/10))
+tsE = R[t,:,0][0::idx,:] / brian2.Hz
+t_split = t[0::idx]*dt
+vmax = np.max(tsE)
+for i in range(10):
+    vals = surfdist.utils.recort(tsE[i,:], surf, cortex)
+    # fix time title; should be in seconds
+    plotting.plot_surf_stat_map(surf_file_inf, vals, vmax = vmax,
+                                view = 'lateral',
+                                title=('%s' % t_split[i]),
+                                colorbar = False, axes=ax[0][i]
+                               )
+    plotting.plot_surf_stat_map(surf_file_inf, vals, vmax = vmax,
+                                view = 'medial',
+                                colorbar = False, axes=ax[1][i]
+                               )
+plt.savefig('./figures/stim_brains_E.png')
 plt.close(fig)
