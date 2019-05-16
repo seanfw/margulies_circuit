@@ -23,7 +23,7 @@ def initialize_pm(parameters, num_nodes, num_iterations, dt):
 
     # Choose initial values for rates and synapse variables
     R0 = np.ones((num_nodes, num_pops))
-    R0 = R0 * parameters['r0_E'] 
+    R0 = R0 * parameters['r0_E']
     S_NMDA0 = np.ones((num_nodes,num_pops)) * 0.1
     S_GABA0 = np.zeros((num_nodes,num_pops))
 
@@ -40,10 +40,10 @@ def initialize_pm(parameters, num_nodes, num_iterations, dt):
     I_longRange_NMDA = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
     I_midRange_NMDA  = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
     I_midRange_GABA  = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
-    I_local_NMDA     =  np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
-    I_local_GABA     =  np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
-    I_total          =  np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
-    I_noise          =  np.zeros((num_nodes,num_pops)) * brian2.pA
+    I_local_NMDA     = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
+    I_local_GABA     = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
+    I_total          = np.zeros((num_iterations,num_nodes,num_pops)) * brian2.pA
+    I_noise          = np.zeros((num_nodes,num_pops)) * brian2.pA
 
     # # Define background inputs
     I_0 = np.zeros((num_nodes, num_pops)) * brian2.pA
