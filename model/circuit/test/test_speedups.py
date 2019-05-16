@@ -2,9 +2,10 @@ import pytest
 import numpy as np
 import brian2
 
+# Run tests on index_array
 num_nodes       = 200
 i_t             = num_nodes * 2
-num_iterations = num_nodes * 3
+num_iterations  = num_nodes * 3
 tract_delays    = np.random.randint(i_t-2, size=(num_nodes,num_nodes))
 pm_nmda         = np.random.randn(num_iterations, num_nodes, 2)
 
@@ -50,6 +51,8 @@ def sum_mult_fast(tract_connectivity,S_tract_delay,pl):
     return pm
 
 def test_sum_mult():
+
     P1 = sum_mult(tract_connectivity,S_tract_delay,pl)
     P2 = sum_mult_fast(tract_connectivity,S_tract_delay,pl)
+
     np.testing.assert_allclose(P1,P2,rtol=1e-06)
