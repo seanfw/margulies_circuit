@@ -86,7 +86,9 @@ traj = dmModel.compute('trajectory1')
 pts = traj.sample()
 plt.plot(pts['S_GABA'],pts['S_NMDA'],'r-o')
 
-################################################################################
+plt.savefig('./figures/phase1.png')
+plt.close()
+############################################################################
 # Set the lower bound of the control (bifurcation) parameter
 dmModel.set(pars = {'g_Eself': 0.45})
 
@@ -111,3 +113,6 @@ PC.newCurve(PCargs)
 PC['EQ1'].forward()
 
 PC['EQ1'].display(['g_Eself','S_NMDA'], stability=True, figure=1)
+
+plt.savefig('./figures/phase2.png')
+plt.close()
