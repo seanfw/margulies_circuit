@@ -7,5 +7,5 @@ nilearn
 networkx
 numba
 configparser
-cython
+Cython
 gdist
