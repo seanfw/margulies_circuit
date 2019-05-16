@@ -8,4 +8,4 @@ networkx
 numba
 configparser
 tvb-gdist
-git+https://github.com/margulies/pydstool.git
+git+https://github.com/margulies/pydstool.git@master+egg=pydstool
