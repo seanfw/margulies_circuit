@@ -46,7 +46,7 @@ def plot_surfaces(R)
 def plot_timeseries(R):
 
     config = configparser.ConfigParser()
-    config.read('./config.ini')
+    config.read('./circuit/config.ini')
     c = config['SETUP']
 
     dt             = float(c.get('dt')) * brian2.ms  # timestep
