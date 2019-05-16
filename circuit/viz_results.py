@@ -10,7 +10,7 @@ def plot_surfaces(R)
     import nibabel as nib
 
     config = configparser.ConfigParser()
-    config.read('./circuits/config.ini')
+    config.read('./circuit/config.ini')
     c = config['SETUP']
 
     dt = float(c.get('dt')) * brian2.ms  # timestep
@@ -81,5 +81,5 @@ def plot_timeseries(R):
     plt.ylabel('firing rate (Hz)')
     # plt.ylim(0, 80)
 
-    plt.savefig('./circuits/figures/stim_response.png')
+    plt.savefig('./circuit/figures/stim_response.png')
     plt.close(fig)

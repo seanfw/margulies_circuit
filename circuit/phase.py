@@ -89,7 +89,7 @@ def run_phase():
     pts = traj.sample()
     plt.plot(pts['S_GABA'],pts['S_NMDA'],'r-o')
 
-    plt.savefig('./circuits/figures/phase1.png')
+    plt.savefig('./circuit/figures/phase1.png')
     plt.close()
     ############################################################################
 
@@ -118,5 +118,5 @@ def run_phase():
 
     PC['EQ1'].display(['g_Eself','S_NMDA'], stability=True, figure=1)
 
-    plt.savefig('./circuits/figures/phase2.png')
+    plt.savefig('./circuit/figures/phase2.png')
     plt.close()
