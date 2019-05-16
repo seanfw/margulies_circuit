@@ -3,7 +3,9 @@
 import brian2
 import numpy as np
 import configparser
+import argparse
 
+from circuit import *
 from connectivity import get_surface_connectivity, get_longdistance_connectivity
 from local_circuit import initialize_local, current_to_frequency, NMDA_deriv, GABA_deriv
 from model import get_stim
@@ -13,16 +15,22 @@ from surfdist_functions import *
 from speedups import mk_tr_delay
 
 # Set up simulation details
+parser = argparse.ArgumentParser()
+parser.add_argument('-c', metavar='in-file', type=argparse.FileType('r'))
+args = parser.parse_args()
 config = configparser.ConfigParser()
-config.read('./config.ini')
+if args.c:
+    config.read(args.c.name)
+else:
+    config.read('./config.ini')
 c = config['SETUP']
 
 # setup connectivity
 surface_connectivity = get_surface_connectivity(c.get('surf_file'), c.get('cort_file'))
 tract_connectivity   = get_longdistance_connectivity(c.get('surf_file'),
                                                      c.get('cort_file'),
-                                                     './average_sc.pconn.nii',
-                                                     'Glasser_NetworkPartition_v9.fsa4.L.label.gii')
+                                                     './circuit/data/average_sc.pconn.nii',
+                                                     './circuit/data/Glasser_NetworkPartition_v9.fsa4.L.label.gii')
 
 # setup delays
 tract_delays, max_delay, S_tract_delay = get_delays(c.get('surf_file'), c.get('cort_file'))
@@ -98,7 +106,7 @@ for i_t1 in range(1,num_iterations):
 
 # save output
 if c.get('save_output') == 'True':
-    np.save('./results/R.npy', pm['R'])
+    np.save('./circuit/results/R.npy', pm['R'])
 
 if c.get('viz_ts') == 'True':
     from viz_results import plot_timeseries

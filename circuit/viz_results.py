@@ -3,9 +3,9 @@ import configparser
 import numpy as np
 import brian2
 
-def plot_surfaces(R)
+def plot_surfaces(R):
 
-    from surfdist_functions import *
+    from surfdist_functions import recort
     from nilearn import plotting
     import nibabel as nib
 

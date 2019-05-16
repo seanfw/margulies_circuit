@@ -7,5 +7,6 @@ nilearn
 networkx
 numba
 configparser
+argparse
 tvb-gdist
 git+https://github.com/margulies/pydstool.git#egg=pydstool

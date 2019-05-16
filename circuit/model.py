@@ -6,7 +6,7 @@ def get_stim(annot_file, label_name, cortex_file):
 
     import numpy as np
     import nibabel as nib
-    from surfdist_functions import *
+    from circuit.surfdist_functions import load_freesurfer_label, translate_src
 
     # Let's apply external stimulation to V1 populations E1 & E2
     V1 = load_freesurfer_label(annot_file, label_name)

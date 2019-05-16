@@ -3,8 +3,15 @@ import brian2
 
 def initialize_local(num_nodes):
     import configparser
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-c', metavar='in-file', type=argparse.FileType('r'))
+    args = parser.parse_args()
     config_p = configparser.ConfigParser()
-    config_p.read('./config.ini')
+    if args.c:
+        config_p.read(args.c.name)
+    else:
+        config_p.read('./config.ini')
     p = config_p['CIRCUIT_PARAMETERS']
 
     parameters = {}
