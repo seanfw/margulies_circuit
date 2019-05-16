@@ -2,7 +2,7 @@ def initialize_pm(parameters, num_nodes, num_iterations, dt):
 
     import numpy as np
     import brian2
-    import pandas
+    # import pandas
 
     ######## LOCAL CONNECTIVITY MATRIX ########
     J =  np.array([
@@ -17,7 +17,7 @@ def initialize_pm(parameters, num_nodes, num_iterations, dt):
     J_NMDA = J*((J>0).astype(np.int))
     J_GABA = J*((J<0).astype(np.int))
 
-    df_J = pandas.DataFrame(J, columns=pops_column_list, index=pops_row_list)
+    #df_J = pandas.DataFrame(J, columns=pops_column_list, index=pops_row_list)
 
     num_pops  = J.shape[0]
 

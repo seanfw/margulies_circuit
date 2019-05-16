@@ -23,12 +23,11 @@ def load_surface(surface, cortex_map):
 
     import numpy as np
     import nibabel as nib
-    import surfdist
-    from surfdist import utils
+    from surfdist_functions import surf_keep_cortex
 
     surf = nib.freesurfer.read_geometry(surface)
     cortex = np.sort(nib.freesurfer.read_label(cortex_map))
-    surf_new = surfdist.utils.surf_keep_cortex(surf, cortex)
+    surf_new = surf_keep_cortex(surf, cortex)
 
     return surf_new
 

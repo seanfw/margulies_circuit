@@ -1,0 +1,10 @@
+brian2
+numpy
+scipy
+matplotlib
+nibabel
+nilearn
+networkx
+numba
+configparser
+gdist
