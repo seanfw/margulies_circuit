@@ -10,7 +10,7 @@ def plot_surfaces(R)
     import nibabel as nib
 
     config = configparser.ConfigParser()
-    config.read('./config.ini')
+    config.read('./circuits/config.ini')
     c = config['SETUP']
 
     dt = float(c.get('dt')) * brian2.ms  # timestep
@@ -39,7 +39,7 @@ def plot_surfaces(R)
                                     view = 'medial',
                                     colorbar = False, axes=ax[1][i]
                                    )
-    plt.savefig('./figures/stim_brains_E.png')
+    plt.savefig('./circuits/figures/stim_brains_E.png')
     plt.close(fig)
 
 
@@ -81,5 +81,5 @@ def plot_timeseries(R):
     plt.ylabel('firing rate (Hz)')
     # plt.ylim(0, 80)
 
-    plt.savefig('./figures/stim_response.png')
+    plt.savefig('./circuits/figures/stim_response.png')
     plt.close(fig)
