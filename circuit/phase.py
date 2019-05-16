@@ -1,11 +1,8 @@
 #!/bin/python3
-import scipy
 from scipy import special
 import PyDSTool as dst
 import numpy as np
-from matplotlib import pyplot as plt
-import pandas
-import scipy.io as si
+import matplotlib.pyplot as plt
 import brian2
 
 DSargs = dst.args(name='E-I_model')
